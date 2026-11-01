@@ -52,17 +52,5 @@ pipeline {
             }
         }
     }
-    
-
-    post {
-
-        success {
-            echo "Deployment successful: ${IMAGE}:${IMAGE_VERSION}"
-        }
-
-        failure {
-            echo "Deployment failed"
-        }
-    }
 
 }
