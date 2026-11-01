@@ -39,7 +39,7 @@ pipeline {
         stage('push to dockerhub'){
             steps{
                 sh '''
-                    docker push ${IMAGE}:v{BUILD_NUMBER}
+                    docker push ${IMAGE}:v${BUILD_NUMBER}
                 '''
             }
         }
