@@ -47,10 +47,28 @@ pipeline {
             steps{
                 sh '''
                     kubectl apply -f k8s/
-                    kubectl get pods
                 '''
             }
         }
+
+        stage('Update Image') {
+            steps {
+                sh '''
+                    kubectl set image deployment/static-deployment static=${IMAGE}:v${BUILD_NUMBER}
+                '''
+            }
+        }
+
+        stage('Rollout Status') {
+            steps {
+                sh '''
+                    kubectl rollout status deployment/static-deployment \
+                        --timeout=5m
+                '''
+            }
+        }
+
+        
     }
 
 }
